@@ -8,3 +8,11 @@ subprojects {
     }
   }
 }
+
+tasks {
+  withType<JavaCompile>().configureEach {
+    sourceCompatibility = "21"
+    targetCompatibility = "21"
+    options.release.set(21)
+  }
+}

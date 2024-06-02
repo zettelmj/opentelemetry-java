@@ -19,3 +19,11 @@ dependencies {
   testImplementation("junit:junit")
   testImplementation("org.junit.vintage:junit-vintage-engine")
 }
+
+tasks {
+  withType<JavaCompile>().configureEach {
+    sourceCompatibility = "21"
+    targetCompatibility = "21"
+    options.release.set(21)
+  }
+}

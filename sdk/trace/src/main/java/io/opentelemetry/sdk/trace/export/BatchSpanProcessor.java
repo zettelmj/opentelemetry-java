@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -85,8 +86,9 @@ public final class BatchSpanProcessor implements SpanProcessor {
             maxExportBatchSize,
             exporterTimeoutNanos,
             JcTools.newFixedSizeQueue(maxQueueSize));
-    Thread workerThread = new DaemonThreadFactory(WORKER_THREAD_NAME).newThread(worker);
-    workerThread.start();
+    Thread workerThread = Thread.ofVirtual().name(WORKER_THREAD_NAME).start(worker);
+    //Thread workerThread = new DaemonThreadFactory(WORKER_THREAD_NAME).newThread(worker);
+    //workerThread.start();
   }
 
   @Override

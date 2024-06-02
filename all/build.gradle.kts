@@ -12,7 +12,9 @@ tasks {
   // projects target Java 8 except :exporters:http-sender:jdk, which targets
   // Java 11
   withType(JavaCompile::class) {
-    options.release.set(11)
+    sourceCompatibility = "21"
+    targetCompatibility = "21"
+    options.release.set(21)
   }
 
   val testJavaVersion: String? by project
